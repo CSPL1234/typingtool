@@ -1,0 +1,792 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Provider Survey - Detailed Prototype</title>
+  <!-- Bootstrap CSS (for the modal) -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    /* Additional custom styles (if needed) */
+    .square-btn {
+      width: 50px;
+      height: 50px;
+    }
+  </style>
+</head>
+<body class="bg-gray-100">
+  <!-- Survey Container -->
+  <div class="max-w-3xl mx-auto p-6 bg-white rounded-lg shadow-lg my-10">
+    <!-- Page 0: NPI ID -->
+    <div id="question-0" class="question">
+      <div class="text-center mb-6">
+        <h1 class="text-3xl font-bold mb-2">Provider Survey</h1>
+        <p class="text-lg text-gray-600">Please enter your NPI ID</p>
+      </div>
+      <div class="mb-4">
+        <label for="npi-id" class="block text-gray-700 font-medium mb-1">NPI ID:</label>
+        <input type="text" id="npi-id" class="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400" placeholder="Enter your NPI ID" required />
+      </div>
+    </div>
+
+    <!-- Page 1: Attitude-Based Questions (Part A) -->
+    <div id="question-1" class="question" style="display: none;">
+      <h2 class="text-2xl font-semibold mb-4">Attitude-Based Questions</h2>
+      <!-- Q1: Perception of Value (MCQ - Checkboxes) -->
+      <h4 class="text-xl font-medium mb-2">How do you perceive the value of one-time gene therapy versus chronic treatment options?</h4>
+      <div class="mb-4 space-y-2">
+        <div>
+          <input type="checkbox" id="value_root_cause" name="value_options" value="root_cause" class="mr-2">
+          <label for="value_root_cause">One-time gene therapy focuses on the root cause treatment approach</label>
+        </div>
+        <div>
+          <input type="checkbox" id="value_disease_modifying" name="value_options" value="disease_modifying" class="mr-2">
+          <label for="value_disease_modifying">Believe gene therapy offers better disease-modifying potential</label>
+        </div>
+        <div>
+          <input type="checkbox" id="value_one_time_admin" name="value_options" value="one_time_admin" class="mr-2">
+          <label for="value_one_time_admin">Value one-time administration over chronic dosing burden</label>
+        </div>
+        <div>
+          <input type="checkbox" id="value_cost_effective" name="value_options" value="cost_effective" class="mr-2">
+          <label for="value_cost_effective">Consider cost-effectiveness of one-time vs chronic therapy</label>
+        </div>
+        <div>
+          <input type="checkbox" id="value_established_protocol" name="value_options" value="established_protocol" class="mr-2">
+          <label for="value_established_protocol">Prefer established treatment protocols with proven results</label>
+        </div>
+        <div>
+          <input type="checkbox" id="value_patient_factors" name="value_options" value="patient_factors" class="mr-2">
+          <label for="value_patient_factors">Evaluate patient-specific factors for therapy selection</label>
+        </div>
+      </div>
+
+      <!-- Q2: Comfort Level with Initiating New Treatments -->
+      <h4 class="text-xl font-medium mb-2">What is your comfort level with initiating new treatment approaches?</h4>
+      <!-- (a) Experience -->
+      <p class="mb-1 font-medium">Experience:</p>
+      <div class="mb-4 space-x-4">
+        <label class="inline-flex items-center">
+          <input type="radio" id="experience_low" name="experience" value="Low" class="form-radio text-blue-500">
+          <span class="ml-2">Low</span>
+        </label>
+        <label class="inline-flex items-center">
+          <input type="radio" id="experience_medium" name="experience" value="Medium" class="form-radio text-blue-500">
+          <span class="ml-2">Medium</span>
+        </label>
+        <label class="inline-flex items-center">
+          <input type="radio" id="experience_high" name="experience" value="High" class="form-radio text-blue-500">
+          <span class="ml-2">High</span>
+        </label>
+      </div>
+
+      <!-- (b) Decision Making Process: Patient Factors -->
+      <p class="mb-1 font-medium">Decision Making Process (Patient factors – characteristics, comorbid conditions, age, and patient preference):</p>
+      <div class="mb-4 space-x-4">
+        <label class="inline-flex items-center">
+          <input type="radio" id="decision_patient_low" name="decision_patient" value="Low" class="form-radio text-blue-500">
+          <span class="ml-2">Low</span>
+        </label>
+        <label class="inline-flex items-center">
+          <input type="radio" id="decision_patient_medium" name="decision_patient" value="Medium" class="form-radio text-blue-500">
+          <span class="ml-2">Medium</span>
+        </label>
+        <label class="inline-flex items-center">
+          <input type="radio" id="decision_patient_high" name="decision_patient" value="High" class="form-radio text-blue-500">
+          <span class="ml-2">High</span>
+        </label>
+      </div>
+
+      <!-- (c) Decision Making Process: Treatment Parameters -->
+      <p class="mb-1 font-medium">Decision Making Process (Treatment parameters – Efficacy, Safety, ROA, MoA, Dosing):</p>
+      <div class="mb-4 space-x-4">
+        <label class="inline-flex items-center">
+          <input type="radio" id="decision_treatment_low" name="decision_treatment" value="Low" class="form-radio text-blue-500">
+          <span class="ml-2">Low</span>
+        </label>
+        <label class="inline-flex items-center">
+          <input type="radio" id="decision_treatment_medium" name="decision_treatment" value="Medium" class="form-radio text-blue-500">
+          <span class="ml-2">Medium</span>
+        </label>
+        <label class="inline-flex items-center">
+          <input type="radio" id="decision_treatment_high" name="decision_treatment" value="High" class="form-radio text-blue-500">
+          <span class="ml-2">High</span>
+        </label>
+      </div>
+
+      <!-- (d) Institutional Capability -->
+      <p class="mb-1 font-medium">Institutional Capability (GT capability, MDT):</p>
+      <div class="mb-4 space-x-4">
+        <label class="inline-flex items-center">
+          <input type="radio" id="institutional_low" name="institutional" value="Low" class="form-radio text-blue-500">
+          <span class="ml-2">Low</span>
+        </label>
+        <label class="inline-flex items-center">
+          <input type="radio" id="institutional_medium" name="institutional" value="Medium" class="form-radio text-blue-500">
+          <span class="ml-2">Medium</span>
+        </label>
+        <label class="inline-flex items-center">
+          <input type="radio" id="institutional_high" name="institutional" value="High" class="form-radio text-blue-500">
+          <span class="ml-2">High</span>
+        </label>
+      </div>
+
+      <!-- (e) Treatment Burden Tolerability -->
+      <p class="mb-1 font-medium">Treatment Burden Tolerability:</p>
+      <div class="space-x-4">
+        <label class="inline-flex items-center">
+          <input type="radio" id="burden_low" name="treatment_burden" value="Low" class="form-radio text-blue-500">
+          <span class="ml-2">Low</span>
+        </label>
+        <label class="inline-flex items-center">
+          <input type="radio" id="burden_medium" name="treatment_burden" value="Medium" class="form-radio text-blue-500">
+          <span class="ml-2">Medium</span>
+        </label>
+        <label class="inline-flex items-center">
+          <input type="radio" id="burden_high" name="treatment_burden" value="High" class="form-radio text-blue-500">
+          <span class="ml-2">High</span>
+        </label>
+      </div>
+    </div>
+
+    <!-- Page 2: Attitude-Based Questions (Part B – Rating Scales) -->
+    <div id="question-2" class="question" style="display: none;">
+      <h2 class="text-2xl font-semibold mb-4">Attitude-Based Rating Scales</h2>
+      
+      <!-- Q3: Treatment Selection Importance -->
+      <h4 class="text-xl font-medium mb-2">Treatment Selection Importance</h4>
+      <!-- Each attribute gets a 1-5 scale -->
+      <div class="space-y-4">
+        <!-- Example rating group for MoA -->
+        <div class="rating-group">
+            <label class="block font-medium">MoA:</label>
+            <div class="flex space-x-2">
+              <input type="radio" class="sr-only" name="roa_selection" id="roa_selection_1" value="1">
+              <label for="roa_selection_1" class="cursor-pointer border border-blue-500 text-blue-500 hover:bg-blue-500 hover:text-white transition duration-150 ease-in-out w-12 h-12 flex items-center justify-center rounded">1</label>
+              <input type="radio" class="sr-only" name="roa_selection" id="roa_selection_2" value="2">
+              <label for="roa_selection_2" class="cursor-pointer border border-blue-500 text-blue-500 hover:bg-blue-500 hover:text-white transition duration-150 ease-in-out w-12 h-12 flex items-center justify-center rounded">2</label>
+              <input type="radio" class="sr-only" name="roa_selection" id="roa_selection_3" value="3">
+              <label for="roa_selection_3" class="cursor-pointer border border-blue-500 text-blue-500 hover:bg-blue-500 hover:text-white transition duration-150 ease-in-out w-12 h-12 flex items-center justify-center rounded">3</label>
+              <input type="radio" class="sr-only" name="roa_selection" id="roa_selection_4" value="4">
+              <label for="roa_selection_4" class="cursor-pointer border border-blue-500 text-blue-500 hover:bg-blue-500 hover:text-white transition duration-150 ease-in-out w-12 h-12 flex items-center justify-center rounded">4</label>
+              <input type="radio" class="sr-only" name="roa_selection" id="roa_selection_5" value="5">
+              <label for="roa_selection_5" class="cursor-pointer border border-blue-500 text-blue-500 hover:bg-blue-500 hover:text-white transition duration-150 ease-in-out w-12 h-12 flex items-center justify-center rounded">5</label>
+            </div>
+          </div>
+
+        <!-- Repeat similar blocks for RoA, Efficacy, Safety, Access, Age, Comorbidity, Concomitance, Patient Preference, and Patient Status -->
+        <!-- For brevity, here they are hard-coded without Alpine.js (feel free to change as needed): -->
+        <div class="rating-group">
+          <label class="block font-medium">RoA:</label>
+          <div class="flex space-x-2">
+            <input type="radio" class="sr-only" name="roa_selection" id="roa_selection_1" value="1">
+            <label for="roa_selection_1" class="cursor-pointer border border-blue-500 text-blue-500 hover:bg-blue-500 hover:text-white transition duration-150 ease-in-out w-12 h-12 flex items-center justify-center rounded">1</label>
+            <input type="radio" class="sr-only" name="roa_selection" id="roa_selection_2" value="2">
+            <label for="roa_selection_2" class="cursor-pointer border border-blue-500 text-blue-500 hover:bg-blue-500 hover:text-white transition duration-150 ease-in-out w-12 h-12 flex items-center justify-center rounded">2</label>
+            <input type="radio" class="sr-only" name="roa_selection" id="roa_selection_3" value="3">
+            <label for="roa_selection_3" class="cursor-pointer border border-blue-500 text-blue-500 hover:bg-blue-500 hover:text-white transition duration-150 ease-in-out w-12 h-12 flex items-center justify-center rounded">3</label>
+            <input type="radio" class="sr-only" name="roa_selection" id="roa_selection_4" value="4">
+            <label for="roa_selection_4" class="cursor-pointer border border-blue-500 text-blue-500 hover:bg-blue-500 hover:text-white transition duration-150 ease-in-out w-12 h-12 flex items-center justify-center rounded">4</label>
+            <input type="radio" class="sr-only" name="roa_selection" id="roa_selection_5" value="5">
+            <label for="roa_selection_5" class="cursor-pointer border border-blue-500 text-blue-500 hover:bg-blue-500 hover:text-white transition duration-150 ease-in-out w-12 h-12 flex items-center justify-center rounded">5</label>
+          </div>
+        </div>
+
+        <div class="rating-group">
+            <label class="block font-medium">Efficacy:</label>
+            <div class="flex space-x-2">
+              <input type="radio" class="sr-only" name="roa_selection" id="roa_selection_1" value="1">
+              <label for="roa_selection_1" class="cursor-pointer border border-blue-500 text-blue-500 hover:bg-blue-500 hover:text-white transition duration-150 ease-in-out w-12 h-12 flex items-center justify-center rounded">1</label>
+              <input type="radio" class="sr-only" name="roa_selection" id="roa_selection_2" value="2">
+              <label for="roa_selection_2" class="cursor-pointer border border-blue-500 text-blue-500 hover:bg-blue-500 hover:text-white transition duration-150 ease-in-out w-12 h-12 flex items-center justify-center rounded">2</label>
+              <input type="radio" class="sr-only" name="roa_selection" id="roa_selection_3" value="3">
+              <label for="roa_selection_3" class="cursor-pointer border border-blue-500 text-blue-500 hover:bg-blue-500 hover:text-white transition duration-150 ease-in-out w-12 h-12 flex items-center justify-center rounded">3</label>
+              <input type="radio" class="sr-only" name="roa_selection" id="roa_selection_4" value="4">
+              <label for="roa_selection_4" class="cursor-pointer border border-blue-500 text-blue-500 hover:bg-blue-500 hover:text-white transition duration-150 ease-in-out w-12 h-12 flex items-center justify-center rounded">4</label>
+              <input type="radio" class="sr-only" name="roa_selection" id="roa_selection_5" value="5">
+              <label for="roa_selection_5" class="cursor-pointer border border-blue-500 text-blue-500 hover:bg-blue-500 hover:text-white transition duration-150 ease-in-out w-12 h-12 flex items-center justify-center rounded">5</label>
+            </div>
+          </div>
+
+          <div class="rating-group">
+            <label class="block font-medium">Safety:</label>
+            <div class="flex space-x-2">
+              <input type="radio" class="sr-only" name="roa_selection" id="roa_selection_1" value="1">
+              <label for="roa_selection_1" class="cursor-pointer border border-blue-500 text-blue-500 hover:bg-blue-500 hover:text-white transition duration-150 ease-in-out w-12 h-12 flex items-center justify-center rounded">1</label>
+              <input type="radio" class="sr-only" name="roa_selection" id="roa_selection_2" value="2">
+              <label for="roa_selection_2" class="cursor-pointer border border-blue-500 text-blue-500 hover:bg-blue-500 hover:text-white transition duration-150 ease-in-out w-12 h-12 flex items-center justify-center rounded">2</label>
+              <input type="radio" class="sr-only" name="roa_selection" id="roa_selection_3" value="3">
+              <label for="roa_selection_3" class="cursor-pointer border border-blue-500 text-blue-500 hover:bg-blue-500 hover:text-white transition duration-150 ease-in-out w-12 h-12 flex items-center justify-center rounded">3</label>
+              <input type="radio" class="sr-only" name="roa_selection" id="roa_selection_4" value="4">
+              <label for="roa_selection_4" class="cursor-pointer border border-blue-500 text-blue-500 hover:bg-blue-500 hover:text-white transition duration-150 ease-in-out w-12 h-12 flex items-center justify-center rounded">4</label>
+              <input type="radio" class="sr-only" name="roa_selection" id="roa_selection_5" value="5">
+              <label for="roa_selection_5" class="cursor-pointer border border-blue-500 text-blue-500 hover:bg-blue-500 hover:text-white transition duration-150 ease-in-out w-12 h-12 flex items-center justify-center rounded">5</label>
+            </div>
+          </div>
+          <div class="rating-group">
+            <label class="block font-medium">Access:</label>
+            <div class="flex space-x-2">
+              <input type="radio" class="sr-only" name="roa_selection" id="roa_selection_1" value="1">
+              <label for="roa_selection_1" class="cursor-pointer border border-blue-500 text-blue-500 hover:bg-blue-500 hover:text-white transition duration-150 ease-in-out w-12 h-12 flex items-center justify-center rounded">1</label>
+              <input type="radio" class="sr-only" name="roa_selection" id="roa_selection_2" value="2">
+              <label for="roa_selection_2" class="cursor-pointer border border-blue-500 text-blue-500 hover:bg-blue-500 hover:text-white transition duration-150 ease-in-out w-12 h-12 flex items-center justify-center rounded">2</label>
+              <input type="radio" class="sr-only" name="roa_selection" id="roa_selection_3" value="3">
+              <label for="roa_selection_3" class="cursor-pointer border border-blue-500 text-blue-500 hover:bg-blue-500 hover:text-white transition duration-150 ease-in-out w-12 h-12 flex items-center justify-center rounded">3</label>
+              <input type="radio" class="sr-only" name="roa_selection" id="roa_selection_4" value="4">
+              <label for="roa_selection_4" class="cursor-pointer border border-blue-500 text-blue-500 hover:bg-blue-500 hover:text-white transition duration-150 ease-in-out w-12 h-12 flex items-center justify-center rounded">4</label>
+              <input type="radio" class="sr-only" name="roa_selection" id="roa_selection_5" value="5">
+              <label for="roa_selection_5" class="cursor-pointer border border-blue-500 text-blue-500 hover:bg-blue-500 hover:text-white transition duration-150 ease-in-out w-12 h-12 flex items-center justify-center rounded">5</label>
+            </div>
+          </div>
+          <div class="rating-group">
+            <label class="block font-medium">Concomitance:</label>
+            <div class="flex space-x-2">
+              <input type="radio" class="sr-only" name="roa_selection" id="roa_selection_1" value="1">
+              <label for="roa_selection_1" class="cursor-pointer border border-blue-500 text-blue-500 hover:bg-blue-500 hover:text-white transition duration-150 ease-in-out w-12 h-12 flex items-center justify-center rounded">1</label>
+              <input type="radio" class="sr-only" name="roa_selection" id="roa_selection_2" value="2">
+              <label for="roa_selection_2" class="cursor-pointer border border-blue-500 text-blue-500 hover:bg-blue-500 hover:text-white transition duration-150 ease-in-out w-12 h-12 flex items-center justify-center rounded">2</label>
+              <input type="radio" class="sr-only" name="roa_selection" id="roa_selection_3" value="3">
+              <label for="roa_selection_3" class="cursor-pointer border border-blue-500 text-blue-500 hover:bg-blue-500 hover:text-white transition duration-150 ease-in-out w-12 h-12 flex items-center justify-center rounded">3</label>
+              <input type="radio" class="sr-only" name="roa_selection" id="roa_selection_4" value="4">
+              <label for="roa_selection_4" class="cursor-pointer border border-blue-500 text-blue-500 hover:bg-blue-500 hover:text-white transition duration-150 ease-in-out w-12 h-12 flex items-center justify-center rounded">4</label>
+              <input type="radio" class="sr-only" name="roa_selection" id="roa_selection_5" value="5">
+              <label for="roa_selection_5" class="cursor-pointer border border-blue-500 text-blue-500 hover:bg-blue-500 hover:text-white transition duration-150 ease-in-out w-12 h-12 flex items-center justify-center rounded">5</label>
+            </div>
+          </div>
+
+          <div class="rating-group">
+            <label class="block font-medium">Comorbidity:</label>
+            <div class="flex space-x-2">
+              <input type="radio" class="sr-only" name="roa_selection" id="roa_selection_1" value="1">
+              <label for="roa_selection_1" class="cursor-pointer border border-blue-500 text-blue-500 hover:bg-blue-500 hover:text-white transition duration-150 ease-in-out w-12 h-12 flex items-center justify-center rounded">1</label>
+              <input type="radio" class="sr-only" name="roa_selection" id="roa_selection_2" value="2">
+              <label for="roa_selection_2" class="cursor-pointer border border-blue-500 text-blue-500 hover:bg-blue-500 hover:text-white transition duration-150 ease-in-out w-12 h-12 flex items-center justify-center rounded">2</label>
+              <input type="radio" class="sr-only" name="roa_selection" id="roa_selection_3" value="3">
+              <label for="roa_selection_3" class="cursor-pointer border border-blue-500 text-blue-500 hover:bg-blue-500 hover:text-white transition duration-150 ease-in-out w-12 h-12 flex items-center justify-center rounded">3</label>
+              <input type="radio" class="sr-only" name="roa_selection" id="roa_selection_4" value="4">
+              <label for="roa_selection_4" class="cursor-pointer border border-blue-500 text-blue-500 hover:bg-blue-500 hover:text-white transition duration-150 ease-in-out w-12 h-12 flex items-center justify-center rounded">4</label>
+              <input type="radio" class="sr-only" name="roa_selection" id="roa_selection_5" value="5">
+              <label for="roa_selection_5" class="cursor-pointer border border-blue-500 text-blue-500 hover:bg-blue-500 hover:text-white transition duration-150 ease-in-out w-12 h-12 flex items-center justify-center rounded">5</label>
+            </div>
+          </div>
+          <div class="rating-group">
+            <label class="block font-medium"> Patient Preference:</label>
+            <div class="flex space-x-2">
+              <input type="radio" class="sr-only" name="roa_selection" id="roa_selection_1" value="1">
+              <label for="roa_selection_1" class="cursor-pointer border border-blue-500 text-blue-500 hover:bg-blue-500 hover:text-white transition duration-150 ease-in-out w-12 h-12 flex items-center justify-center rounded">1</label>
+              <input type="radio" class="sr-only" name="roa_selection" id="roa_selection_2" value="2">
+              <label for="roa_selection_2" class="cursor-pointer border border-blue-500 text-blue-500 hover:bg-blue-500 hover:text-white transition duration-150 ease-in-out w-12 h-12 flex items-center justify-center rounded">2</label>
+              <input type="radio" class="sr-only" name="roa_selection" id="roa_selection_3" value="3">
+              <label for="roa_selection_3" class="cursor-pointer border border-blue-500 text-blue-500 hover:bg-blue-500 hover:text-white transition duration-150 ease-in-out w-12 h-12 flex items-center justify-center rounded">3</label>
+              <input type="radio" class="sr-only" name="roa_selection" id="roa_selection_4" value="4">
+              <label for="roa_selection_4" class="cursor-pointer border border-blue-500 text-blue-500 hover:bg-blue-500 hover:text-white transition duration-150 ease-in-out w-12 h-12 flex items-center justify-center rounded">4</label>
+              <input type="radio" class="sr-only" name="roa_selection" id="roa_selection_5" value="5">
+              <label for="roa_selection_5" class="cursor-pointer border border-blue-500 text-blue-500 hover:bg-blue-500 hover:text-white transition duration-150 ease-in-out w-12 h-12 flex items-center justify-center rounded">5</label>
+            </div>
+          </div>
+          <div class="rating-group">
+            <label class="block font-medium">Patient Status:</label>
+            <div class="flex space-x-2">
+              <input type="radio" class="sr-only" name="roa_selection" id="roa_selection_1" value="1">
+              <label for="roa_selection_1" class="cursor-pointer border border-blue-500 text-blue-500 hover:bg-blue-500 hover:text-white transition duration-150 ease-in-out w-12 h-12 flex items-center justify-center rounded">1</label>
+              <input type="radio" class="sr-only" name="roa_selection" id="roa_selection_2" value="2">
+              <label for="roa_selection_2" class="cursor-pointer border border-blue-500 text-blue-500 hover:bg-blue-500 hover:text-white transition duration-150 ease-in-out w-12 h-12 flex items-center justify-center rounded">2</label>
+              <input type="radio" class="sr-only" name="roa_selection" id="roa_selection_3" value="3">
+              <label for="roa_selection_3" class="cursor-pointer border border-blue-500 text-blue-500 hover:bg-blue-500 hover:text-white transition duration-150 ease-in-out w-12 h-12 flex items-center justify-center rounded">3</label>
+              <input type="radio" class="sr-only" name="roa_selection" id="roa_selection_4" value="4">
+              <label for="roa_selection_4" class="cursor-pointer border border-blue-500 text-blue-500 hover:bg-blue-500 hover:text-white transition duration-150 ease-in-out w-12 h-12 flex items-center justify-center rounded">4</label>
+              <input type="radio" class="sr-only" name="roa_selection" id="roa_selection_5" value="5">
+              <label for="roa_selection_5" class="cursor-pointer border border-blue-500 text-blue-500 hover:bg-blue-500 hover:text-white transition duration-150 ease-in-out w-12 h-12 flex items-center justify-center rounded">5</label>
+            </div>
+          </div>
+          
+        <!-- You would repeat similar markup for: -->
+        <!-- Efficacy: name="efficacy_selection" -->
+        <!-- Safety: name="safety_selection" -->
+        <!-- Access: name="access_selection" -->
+        <!-- Age: name="age_selection" -->
+        <!-- Comorbidity: name="comorbidity_selection" -->
+        <!-- Concomitance: name="concomitance_selection" -->
+        <!-- Patient Preference: name="patient_preference_selection" -->
+        <!-- Patient Status: name="patient_status_selection" -->
+      </div>
+
+      <!-- Q4: Treatment Switching Importance -->
+      <h4 class="text-xl font-medium mt-8 mb-2">Treatment Switching Importance</h4>
+      <div class="space-y-4">
+        <!-- For example, rating group for MoA in switching -->
+        <div class="rating-group">
+          <label class="block font-medium">MoA:</label>
+          <div class="flex space-x-2">
+            <input type="radio" class="sr-only" name="moa_switch" id="moa_switch_1" value="1">
+            <label for="moa_switch_1" class="cursor-pointer border border-blue-500 text-blue-500 hover:bg-blue-500 hover:text-white transition duration-150 ease-in-out w-12 h-12 flex items-center justify-center rounded">1</label>
+            <input type="radio" class="sr-only" name="moa_switch" id="moa_switch_2" value="2">
+            <label for="moa_switch_2" class="cursor-pointer border border-blue-500 text-blue-500 hover:bg-blue-500 hover:text-white transition duration-150 ease-in-out w-12 h-12 flex items-center justify-center rounded">2</label>
+            <input type="radio" class="sr-only" name="moa_switch" id="moa_switch_3" value="3">
+            <label for="moa_switch_3" class="cursor-pointer border border-blue-500 text-blue-500 hover:bg-blue-500 hover:text-white transition duration-150 ease-in-out w-12 h-12 flex items-center justify-center rounded">3</label>
+            <input type="radio" class="sr-only" name="moa_switch" id="moa_switch_4" value="4">
+            <label for="moa_switch_4" class="cursor-pointer border border-blue-500 text-blue-500 hover:bg-blue-500 hover:text-white transition duration-150 ease-in-out w-12 h-12 flex items-center justify-center rounded">4</label>
+            <input type="radio" class="sr-only" name="moa_switch" id="moa_switch_5" value="5">
+            <label for="moa_switch_5" class="cursor-pointer border border-blue-500 text-blue-500 hover:bg-blue-500 hover:text-white transition duration-150 ease-in-out w-12 h-12 flex items-center justify-center rounded">5</label>
+          </div>
+        </div>
+        <!-- Repeat similar rating groups for RoA, Efficacy, Safety, Access, and Eligibility -->
+        <div class="rating-group">
+            <label class="block font-medium">MoA:</label>
+            <div class="flex space-x-2">
+              <input type="radio" class="sr-only" name="roa_selection" id="roa_selection_1" value="1">
+              <label for="roa_selection_1" class="cursor-pointer border border-blue-500 text-blue-500 hover:bg-blue-500 hover:text-white transition duration-150 ease-in-out w-12 h-12 flex items-center justify-center rounded">1</label>
+              <input type="radio" class="sr-only" name="roa_selection" id="roa_selection_2" value="2">
+              <label for="roa_selection_2" class="cursor-pointer border border-blue-500 text-blue-500 hover:bg-blue-500 hover:text-white transition duration-150 ease-in-out w-12 h-12 flex items-center justify-center rounded">2</label>
+              <input type="radio" class="sr-only" name="roa_selection" id="roa_selection_3" value="3">
+              <label for="roa_selection_3" class="cursor-pointer border border-blue-500 text-blue-500 hover:bg-blue-500 hover:text-white transition duration-150 ease-in-out w-12 h-12 flex items-center justify-center rounded">3</label>
+              <input type="radio" class="sr-only" name="roa_selection" id="roa_selection_4" value="4">
+              <label for="roa_selection_4" class="cursor-pointer border border-blue-500 text-blue-500 hover:bg-blue-500 hover:text-white transition duration-150 ease-in-out w-12 h-12 flex items-center justify-center rounded">4</label>
+              <input type="radio" class="sr-only" name="roa_selection" id="roa_selection_5" value="5">
+              <label for="roa_selection_5" class="cursor-pointer border border-blue-500 text-blue-500 hover:bg-blue-500 hover:text-white transition duration-150 ease-in-out w-12 h-12 flex items-center justify-center rounded">5</label>
+            </div>
+          </div>
+
+        <!-- Repeat similar blocks for RoA, Efficacy, Safety, Access, Age, Comorbidity, Concomitance, Patient Preference, and Patient Status -->
+        <!-- For brevity, here they are hard-coded without Alpine.js (feel free to change as needed): -->
+        <div class="rating-group">
+          <label class="block font-medium">RoA:</label>
+          <div class="flex space-x-2">
+            <input type="radio" class="sr-only" name="roa_selection" id="roa_selection_1" value="1">
+            <label for="roa_selection_1" class="cursor-pointer border border-blue-500 text-blue-500 hover:bg-blue-500 hover:text-white transition duration-150 ease-in-out w-12 h-12 flex items-center justify-center rounded">1</label>
+            <input type="radio" class="sr-only" name="roa_selection" id="roa_selection_2" value="2">
+            <label for="roa_selection_2" class="cursor-pointer border border-blue-500 text-blue-500 hover:bg-blue-500 hover:text-white transition duration-150 ease-in-out w-12 h-12 flex items-center justify-center rounded">2</label>
+            <input type="radio" class="sr-only" name="roa_selection" id="roa_selection_3" value="3">
+            <label for="roa_selection_3" class="cursor-pointer border border-blue-500 text-blue-500 hover:bg-blue-500 hover:text-white transition duration-150 ease-in-out w-12 h-12 flex items-center justify-center rounded">3</label>
+            <input type="radio" class="sr-only" name="roa_selection" id="roa_selection_4" value="4">
+            <label for="roa_selection_4" class="cursor-pointer border border-blue-500 text-blue-500 hover:bg-blue-500 hover:text-white transition duration-150 ease-in-out w-12 h-12 flex items-center justify-center rounded">4</label>
+            <input type="radio" class="sr-only" name="roa_selection" id="roa_selection_5" value="5">
+            <label for="roa_selection_5" class="cursor-pointer border border-blue-500 text-blue-500 hover:bg-blue-500 hover:text-white transition duration-150 ease-in-out w-12 h-12 flex items-center justify-center rounded">5</label>
+          </div>
+        </div>
+
+        <div class="rating-group">
+            <label class="block font-medium">Efficacy:</label>
+            <div class="flex space-x-2">
+              <input type="radio" class="sr-only" name="roa_selection" id="roa_selection_1" value="1">
+              <label for="roa_selection_1" class="cursor-pointer border border-blue-500 text-blue-500 hover:bg-blue-500 hover:text-white transition duration-150 ease-in-out w-12 h-12 flex items-center justify-center rounded">1</label>
+              <input type="radio" class="sr-only" name="roa_selection" id="roa_selection_2" value="2">
+              <label for="roa_selection_2" class="cursor-pointer border border-blue-500 text-blue-500 hover:bg-blue-500 hover:text-white transition duration-150 ease-in-out w-12 h-12 flex items-center justify-center rounded">2</label>
+              <input type="radio" class="sr-only" name="roa_selection" id="roa_selection_3" value="3">
+              <label for="roa_selection_3" class="cursor-pointer border border-blue-500 text-blue-500 hover:bg-blue-500 hover:text-white transition duration-150 ease-in-out w-12 h-12 flex items-center justify-center rounded">3</label>
+              <input type="radio" class="sr-only" name="roa_selection" id="roa_selection_4" value="4">
+              <label for="roa_selection_4" class="cursor-pointer border border-blue-500 text-blue-500 hover:bg-blue-500 hover:text-white transition duration-150 ease-in-out w-12 h-12 flex items-center justify-center rounded">4</label>
+              <input type="radio" class="sr-only" name="roa_selection" id="roa_selection_5" value="5">
+              <label for="roa_selection_5" class="cursor-pointer border border-blue-500 text-blue-500 hover:bg-blue-500 hover:text-white transition duration-150 ease-in-out w-12 h-12 flex items-center justify-center rounded">5</label>
+            </div>
+          </div>
+
+          <div class="rating-group">
+            <label class="block font-medium">Safety:</label>
+            <div class="flex space-x-2">
+              <input type="radio" class="sr-only" name="roa_selection" id="roa_selection_1" value="1">
+              <label for="roa_selection_1" class="cursor-pointer border border-blue-500 text-blue-500 hover:bg-blue-500 hover:text-white transition duration-150 ease-in-out w-12 h-12 flex items-center justify-center rounded">1</label>
+              <input type="radio" class="sr-only" name="roa_selection" id="roa_selection_2" value="2">
+              <label for="roa_selection_2" class="cursor-pointer border border-blue-500 text-blue-500 hover:bg-blue-500 hover:text-white transition duration-150 ease-in-out w-12 h-12 flex items-center justify-center rounded">2</label>
+              <input type="radio" class="sr-only" name="roa_selection" id="roa_selection_3" value="3">
+              <label for="roa_selection_3" class="cursor-pointer border border-blue-500 text-blue-500 hover:bg-blue-500 hover:text-white transition duration-150 ease-in-out w-12 h-12 flex items-center justify-center rounded">3</label>
+              <input type="radio" class="sr-only" name="roa_selection" id="roa_selection_4" value="4">
+              <label for="roa_selection_4" class="cursor-pointer border border-blue-500 text-blue-500 hover:bg-blue-500 hover:text-white transition duration-150 ease-in-out w-12 h-12 flex items-center justify-center rounded">4</label>
+              <input type="radio" class="sr-only" name="roa_selection" id="roa_selection_5" value="5">
+              <label for="roa_selection_5" class="cursor-pointer border border-blue-500 text-blue-500 hover:bg-blue-500 hover:text-white transition duration-150 ease-in-out w-12 h-12 flex items-center justify-center rounded">5</label>
+            </div>
+          </div>
+          <div class="rating-group">
+            <label class="block font-medium">Access:</label>
+            <div class="flex space-x-2">
+              <input type="radio" class="sr-only" name="roa_selection" id="roa_selection_1" value="1">
+              <label for="roa_selection_1" class="cursor-pointer border border-blue-500 text-blue-500 hover:bg-blue-500 hover:text-white transition duration-150 ease-in-out w-12 h-12 flex items-center justify-center rounded">1</label>
+              <input type="radio" class="sr-only" name="roa_selection" id="roa_selection_2" value="2">
+              <label for="roa_selection_2" class="cursor-pointer border border-blue-500 text-blue-500 hover:bg-blue-500 hover:text-white transition duration-150 ease-in-out w-12 h-12 flex items-center justify-center rounded">2</label>
+              <input type="radio" class="sr-only" name="roa_selection" id="roa_selection_3" value="3">
+              <label for="roa_selection_3" class="cursor-pointer border border-blue-500 text-blue-500 hover:bg-blue-500 hover:text-white transition duration-150 ease-in-out w-12 h-12 flex items-center justify-center rounded">3</label>
+              <input type="radio" class="sr-only" name="roa_selection" id="roa_selection_4" value="4">
+              <label for="roa_selection_4" class="cursor-pointer border border-blue-500 text-blue-500 hover:bg-blue-500 hover:text-white transition duration-150 ease-in-out w-12 h-12 flex items-center justify-center rounded">4</label>
+              <input type="radio" class="sr-only" name="roa_selection" id="roa_selection_5" value="5">
+              <label for="roa_selection_5" class="cursor-pointer border border-blue-500 text-blue-500 hover:bg-blue-500 hover:text-white transition duration-150 ease-in-out w-12 h-12 flex items-center justify-center rounded">5</label>
+            </div>
+          </div>
+      </div>
+    </div>
+
+    <!-- Page 3: Behavior-Based Questions -->
+    <div id="question-3" class="question" style="display: none;">
+      <h2 class="text-2xl font-semibold mb-4">Behavior-Based Questions</h2>
+      <!-- Q5: Number of Patients on Each Treatment -->
+      <div class="mb-4">
+        <label for="spinraza_pts" class="block font-medium mb-1">Number of patients you have put on Spinraza:</label>
+        <input type="number" id="spinraza_pts" class="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400" placeholder="Enter number" required>
+      </div>
+      <div class="mb-4">
+        <label for="evrysdi_pts" class="block font-medium mb-1">Number of patients you have put on Evrysdi:</label>
+        <input type="number" id="evrysdi_pts" class="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400" placeholder="Enter number" required>
+      </div>
+      <div class="mb-4">
+        <label for="zolgensma_pts" class="block font-medium mb-1">Number of patients you have put on Zolgensma:</label>
+        <input type="number" id="zolgensma_pts" class="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400" placeholder="Enter number" required>
+      </div>
+      <div class="mb-4">
+        <label for="no_treatment_pts" class="block font-medium mb-1">Number of patients with No Treatment:</label>
+        <input type="number" id="no_treatment_pts" class="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400" placeholder="Enter number" required>
+      </div>
+
+      <!-- Q6: Monitoring Frequency -->
+      <div class="mb-4">
+        <label class="block font-medium mb-1">How frequently do you monitor patients after initiating new treatments?</label>
+        <div class="space-x-4">
+          <label class="inline-flex items-center">
+            <input type="radio" id="monitor_monthly" name="monitor_frequency" value="Once a month" class="form-radio text-blue-500">
+            <span class="ml-2">Once a month</span>
+          </label>
+          <label class="inline-flex items-center">
+            <input type="radio" id="monitor_3months" name="monitor_frequency" value="Once in 3 months" class="form-radio text-blue-500">
+            <span class="ml-2">Once in 3 months</span>
+          </label>
+          <label class="inline-flex items-center">
+            <input type="radio" id="monitor_6months" name="monitor_frequency" value="Once in 6 months" class="form-radio text-blue-500">
+            <span class="ml-2">Once in 6 months</span>
+          </label>
+          <label class="inline-flex items-center">
+            <input type="radio" id="monitor_annual" name="monitor_frequency" value="Annual" class="form-radio text-blue-500">
+            <span class="ml-2">Annual</span>
+          </label>
+        </div>
+      </div>
+
+      <!-- Q7: Clinical Assessments -->
+      <div class="mb-4">
+        <label class="block font-medium mb-1">What clinical assessments do you routinely use to track patient progress?</label>
+        <div class="space-y-2">
+          <div>
+            <input type="checkbox" id="assessment_HFMSE" name="clinical_assessments" value="HFMSE" class="mr-2">
+            <label for="assessment_HFMSE">HFMSE</label>
+          </div>
+          <div>
+            <input type="checkbox" id="assessment_RULM" name="clinical_assessments" value="RULM" class="mr-2">
+            <label for="assessment_RULM">RULM</label>
+          </div>
+          <div>
+            <input type="checkbox" id="assessment_respiratory" name="clinical_assessments" value="Respiratory Function" class="mr-2">
+            <label for="assessment_respiratory">Respiratory Function</label>
+          </div>
+          <div>
+            <input type="checkbox" id="assessment_bulbar" name="clinical_assessments" value="Bulbar Function" class="mr-2">
+            <label for="assessment_bulbar">Bulbar Function</label>
+          </div>
+          <div>
+            <input type="checkbox" id="assessment_PRO" name="clinical_assessments" value="PRO" class="mr-2">
+            <label for="assessment_PRO">PRO</label>
+          </div>
+        </div>
+      </div>
+
+      <!-- Q8: Treatment Sequencing -->
+      <div class="mb-4">
+        <label class="block font-medium mb-1">How do you approach treatment sequencing in your practice?</label>
+        <div class="space-y-2">
+          <div>
+            <input type="checkbox" id="sequencing_stage" name="treatment_sequencing" value="Disease stage and progression" class="mr-2">
+            <label for="sequencing_stage">Disease stage and progression</label>
+          </div>
+          <div>
+            <input type="checkbox" id="sequencing_age" name="treatment_sequencing" value="Patient age and functional status" class="mr-2">
+            <label for="sequencing_age">Patient age and functional status</label>
+          </div>
+          <div>
+            <input type="checkbox" id="sequencing_past" name="treatment_sequencing" value="Past Treatment combinations" class="mr-2">
+            <label for="sequencing_past">Past Treatment combinations</label>
+          </div>
+          <div>
+            <input type="checkbox" id="sequencing_burden" name="treatment_sequencing" value="Treatment burden" class="mr-2">
+            <label for="sequencing_burden">Treatment burden</label>
+          </div>
+          <div>
+            <input type="checkbox" id="sequencing_cost" name="treatment_sequencing" value="Cost / Insurance" class="mr-2">
+            <label for="sequencing_cost">Cost / Insurance</label>
+          </div>
+        </div>
+      </div>
+
+      <!-- Q9: Collaboration with Specialists -->
+      <div class="mb-4">
+        <label class="block font-medium mb-1">How do you collaborate with other specialists in treatment decisions?</label>
+        <div class="space-y-2">
+          <div>
+            <input type="checkbox" id="collab_MDT" name="collaboration" value="MDT" class="mr-2">
+            <label for="collab_MDT">MDT</label>
+          </div>
+          <div>
+            <input type="checkbox" id="collab_other" name="collaboration" value="Other" class="mr-2">
+            <label for="collab_other">Other</label>
+            <input type="text" id="collab_other_text" class="mt-1 w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400" placeholder="If other, please specify">
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Page 4: Belief-Based Questions -->
+    <div id="question-4" class="question" style="display: none;">
+      <h2 class="text-2xl font-semibold mb-4">Belief-Based Questions</h2>
+      <!-- Q10: Curative Potential -->
+      <div class="mb-4">
+        <label class="block font-medium mb-1">Do you believe gene therapy offers curative potential for SMA patients?</label>
+        <div class="space-x-4">
+          <label class="inline-flex items-center">
+            <input type="radio" id="curative_yes" name="curative_gene_therapy" value="Yes" class="form-radio text-blue-500">
+            <span class="ml-2">Yes</span>
+          </label>
+          <label class="inline-flex items-center">
+            <input type="radio" id="curative_no" name="curative_gene_therapy" value="No" class="form-radio text-blue-500">
+            <span class="ml-2">No</span>
+          </label>
+        </div>
+      </div>
+
+      <!-- Q11: Combination Therapy Approaches -->
+      <div class="mb-4">
+        <label class="block font-medium mb-1">What is your perspective on combination therapy approaches?</label>
+        <div class="space-x-4">
+          <label class="inline-flex items-center">
+            <input type="radio" id="combination_wait" name="combination_therapy" value="Wait and Watch" class="form-radio text-blue-500">
+            <span class="ml-2">Wait and Watch</span>
+          </label>
+          <label class="inline-flex items-center">
+            <input type="radio" id="combination_best" name="combination_therapy" value="Always the best Options" class="form-radio text-blue-500">
+            <span class="ml-2">Always the best Options</span>
+          </label>
+          <label class="inline-flex items-center">
+            <input type="radio" id="combination_switch" name="combination_therapy" value="Switch instead of Combination therapy" class="form-radio text-blue-500">
+            <span class="ml-2">Switch instead of Combination therapy</span>
+          </label>
+        </div>
+      </div>
+
+      <!-- Q12: Long-Term Durability -->
+      <div class="mb-4">
+        <label class="block font-medium mb-2">How do you view the long-term durability of current treatment options?</label>
+        <div class="space-y-4">
+          <div class="rating-group">
+            <label class="block font-medium">Zolgensma:</label>
+            <div class="flex space-x-2">
+              <input type="radio" class="sr-only" name="durability_zolgensma" id="durability_zolgensma_1" value="1">
+              <label for="durability_zolgensma_1" class="cursor-pointer border border-blue-500 text-blue-500 hover:bg-blue-500 hover:text-white w-12 h-12 flex items-center justify-center rounded">1</label>
+              <input type="radio" class="sr-only" name="durability_zolgensma" id="durability_zolgensma_2" value="2">
+              <label for="durability_zolgensma_2" class="cursor-pointer border border-blue-500 text-blue-500 hover:bg-blue-500 hover:text-white w-12 h-12 flex items-center justify-center rounded">2</label>
+              <input type="radio" class="sr-only" name="durability_zolgensma" id="durability_zolgensma_3" value="3">
+              <label for="durability_zolgensma_3" class="cursor-pointer border border-blue-500 text-blue-500 hover:bg-blue-500 hover:text-white w-12 h-12 flex items-center justify-center rounded">3</label>
+              <input type="radio" class="sr-only" name="durability_zolgensma" id="durability_zolgensma_4" value="4">
+              <label for="durability_zolgensma_4" class="cursor-pointer border border-blue-500 text-blue-500 hover:bg-blue-500 hover:text-white w-12 h-12 flex items-center justify-center rounded">4</label>
+              <input type="radio" class="sr-only" name="durability_zolgensma" id="durability_zolgensma_5" value="5">
+              <label for="durability_zolgensma_5" class="cursor-pointer border border-blue-500 text-blue-500 hover:bg-blue-500 hover:text-white w-12 h-12 flex items-center justify-center rounded">5</label>
+            </div>
+          </div>
+          <div class="rating-group">
+            <label class="block font-medium">Spinraza:</label>
+            <div class="flex space-x-2">
+              <input type="radio" class="sr-only" name="durability_spinraza" id="durability_spinraza_1" value="1">
+              <label for="durability_spinraza_1" class="cursor-pointer border border-blue-500 text-blue-500 hover:bg-blue-500 hover:text-white w-12 h-12 flex items-center justify-center rounded">1</label>
+              <input type="radio" class="sr-only" name="durability_spinraza" id="durability_spinraza_2" value="2">
+              <label for="durability_spinraza_2" class="cursor-pointer border border-blue-500 text-blue-500 hover:bg-blue-500 hover:text-white w-12 h-12 flex items-center justify-center rounded">2</label>
+              <input type="radio" class="sr-only" name="durability_spinraza" id="durability_spinraza_3" value="3">
+              <label for="durability_spinraza_3" class="cursor-pointer border border-blue-500 text-blue-500 hover:bg-blue-500 hover:text-white w-12 h-12 flex items-center justify-center rounded">3</label>
+              <input type="radio" class="sr-only" name="durability_spinraza" id="durability_spinraza_4" value="4">
+              <label for="durability_spinraza_4" class="cursor-pointer border border-blue-500 text-blue-500 hover:bg-blue-500 hover:text-white w-12 h-12 flex items-center justify-center rounded">4</label>
+              <input type="radio" class="sr-only" name="durability_spinraza" id="durability_spinraza_5" value="5">
+              <label for="durability_spinraza_5" class="cursor-pointer border border-blue-500 text-blue-500 hover:bg-blue-500 hover:text-white w-12 h-12 flex items-center justify-center rounded">5</label>
+            </div>
+          </div>
+          <div class="rating-group">
+            <label class="block font-medium">Evrysdi:</label>
+            <div class="flex space-x-2">
+              <input type="radio" class="sr-only" name="durability_evrysdi" id="durability_evrysdi_1" value="1">
+              <label for="durability_evrysdi_1" class="cursor-pointer border border-blue-500 text-blue-500 hover:bg-blue-500 hover:text-white w-12 h-12 flex items-center justify-center rounded">1</label>
+              <input type="radio" class="sr-only" name="durability_evrysdi" id="durability_evrysdi_2" value="2">
+              <label for="durability_evrysdi_2" class="cursor-pointer border border-blue-500 text-blue-500 hover:bg-blue-500 hover:text-white w-12 h-12 flex items-center justify-center rounded">2</label>
+              <input type="radio" class="sr-only" name="durability_evrysdi" id="durability_evrysdi_3" value="3">
+              <label for="durability_evrysdi_3" class="cursor-pointer border border-blue-500 text-blue-500 hover:bg-blue-500 hover:text-white w-12 h-12 flex items-center justify-center rounded">3</label>
+              <input type="radio" class="sr-only" name="durability_evrysdi" id="durability_evrysdi_4" value="4">
+              <label for="durability_evrysdi_4" class="cursor-pointer border border-blue-500 text-blue-500 hover:bg-blue-500 hover:text-white w-12 h-12 flex items-center justify-center rounded">4</label>
+              <input type="radio" class="sr-only" name="durability_evrysdi" id="durability_evrysdi_5" value="5">
+              <label for="durability_evrysdi_5" class="cursor-pointer border border-blue-500 text-blue-500 hover:bg-blue-500 hover:text-white w-12 h-12 flex items-center justify-center rounded">5</label>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Q13: Early Intervention -->
+      <div class="mb-4">
+        <label class="block font-medium mb-1">What role do you believe early intervention plays in patient outcomes?</label>
+        <div class="space-y-2">
+          <div>
+            <input type="checkbox" id="early_GT" name="early_intervention" value="Best result for GT" class="mr-2">
+            <label for="early_GT">Best result for GT</label>
+          </div>
+          <div>
+            <input type="checkbox" id="early_ambulation" name="early_intervention" value="Early intervention maintains ambulatory status" class="mr-2">
+            <label for="early_ambulation">Early intervention maintains ambulatory status</label>
+          </div>
+          <div>
+            <input type="checkbox" id="early_all" name="early_intervention" value="Best results for all therapy" class="mr-2">
+            <label for="early_all">Best results for all therapy</label>
+          </div>
+          <div>
+            <input type="checkbox" id="early_reduction" name="early_intervention" value="Reduction in Treatment Burden" class="mr-2">
+            <label for="early_reduction">Reduction in Treatment Burden</label>
+          </div>
+          <div>
+            <input type="checkbox" id="early_other" name="early_intervention" value="Any other" class="mr-2">
+            <label for="early_other">Any other</label>
+            <input type="text" id="early_other_text" class="mt-1 w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400" placeholder="If other, please specify">
+          </div>
+        </div>
+      </div>
+
+      <!-- Q14: Efficacy Measures -->
+      <div class="mb-4">
+        <label class="block font-medium mb-1">Do you believe current efficacy measures adequately capture treatment benefits?</label>
+        <div class="space-x-4">
+          <label class="inline-flex items-center">
+            <input type="radio" id="efficacy_measures_yes" name="efficacy_measures" value="Yes" class="form-radio text-blue-500">
+            <span class="ml-2">Yes</span>
+          </label>
+          <label class="inline-flex items-center">
+            <input type="radio" id="efficacy_measures_no" name="efficacy_measures" value="No" class="form-radio text-blue-500">
+            <span class="ml-2">No</span>
+          </label>
+        </div>
+      </div>
+    </div>
+
+    <!-- Navigation Buttons -->
+    <div class="flex justify-center space-x-4 mt-6">
+      <button id="back-btn" onclick="previousQuestion()" class="bg-gray-500 hover:bg-gray-600 text-white py-2 px-4 rounded hidden">Back</button>
+      <button id="next-btn" onclick="nextQuestion()" class="bg-blue-500 hover:bg-blue-600 text-white py-2 px-4 rounded">Next</button>
+      <button id="submit-btn" onclick="submitSurvey()" class="bg-green-500 hover:bg-green-600 text-white py-2 px-4 rounded hidden">Submit</button>
+    </div>
+  </div>
+
+  <!-- Bootstrap Modal for Segment Result -->
+  <div class="modal fade" id="segmentModal" tabindex="-1" aria-labelledby="segmentModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="segmentModalLabel">Segment Result</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body" id="segmentModalBody">
+          <!-- The segment result will be inserted here -->
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Scripts -->
+  <!-- Bootstrap Bundle JS (includes Popper for the modal) -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+  <script>
+    let currentQuestionIndex = 0;
+    const questions = document.querySelectorAll('.question');
+    const nextBtn = document.getElementById('next-btn');
+    const backBtn = document.getElementById('back-btn');
+    const submitBtn = document.getElementById('submit-btn');
+
+    function updateButtons() {
+      backBtn.classList.toggle("hidden", currentQuestionIndex === 0);
+      if (currentQuestionIndex === questions.length - 1) {
+        nextBtn.classList.add("hidden");
+        submitBtn.classList.remove("hidden");
+      } else {
+        nextBtn.classList.remove("hidden");
+        submitBtn.classList.add("hidden");
+      }
+    }
+
+    function nextQuestion() {
+      if (currentQuestionIndex < questions.length - 1) {
+        questions[currentQuestionIndex].style.display = 'none';
+        currentQuestionIndex++;
+        questions[currentQuestionIndex].style.display = 'block';
+        updateButtons();
+      }
+    }
+
+    function previousQuestion() {
+      if (currentQuestionIndex > 0) {
+        questions[currentQuestionIndex].style.display = 'none';
+        currentQuestionIndex--;
+        questions[currentQuestionIndex].style.display = 'block';
+        updateButtons();
+      }
+    }
+
+    // Allow Enter key to work as the Next button
+    document.addEventListener('keydown', function(e) {
+      if (e.key === "Enter") {
+        e.preventDefault();
+        // If not on the last page, move to next page; if on last page, submit
+        if (currentQuestionIndex < questions.length - 1) {
+          nextQuestion();
+        } else {
+          submitSurvey();
+        }
+      }
+    });
+
+    // Dummy segmentation logic:
+    function computeSegment() {
+      // List of rating groups to sum
+      const ratingGroupNames = [
+        "moa_selection", "roa_selection", "efficacy_selection", "safety_selection", "access_selection",
+        "age_selection", "comorbidity_selection", "concomitance_selection", "patient_preference_selection", "patient_status_selection",
+        "moa_switch", "roa_switch", "efficacy_switch", "safety_switch", "access_switch", "eligibility_switch",
+        "durability_zolgensma", "durability_spinraza", "durability_evrysdi"
+      ];
+      let total = 0;
+      ratingGroupNames.forEach(name => {
+        const selected = document.querySelector(`input[name="${name}"]:checked`);
+        if (selected) {
+          total += parseInt(selected.value);
+        }
+      });
+      // For this example, define thresholds based on the possible range:
+      // Minimum possible sum is ratingGroupNames.length * 1, maximum is ratingGroupNames.length * 5.
+      const minTotal = ratingGroupNames.length;
+      const maxTotal = ratingGroupNames.length * 5;
+      const mid = (minTotal + maxTotal) / 2;
+      let segment = "";
+      if (total < mid - 10) {
+        segment = "Low Engagement Segment";
+      } else if (total < mid + 10) {
+        segment = "Medium Engagement Segment";
+      } else {
+        segment = "High Engagement Segment";
+      }
+      return segment;
+    }
+
+    function submitSurvey() {
+      // Compute segmentation (dummy logic)
+      const segment = computeSegment();
+      // Insert the result in the modal body
+      document.getElementById('segmentModalBody').innerText = "Based on your responses, you are in the: " + segment;
+      // Show the modal
+      const segmentModal = new bootstrap.Modal(document.getElementById('segmentModal'));
+      segmentModal.show();
+    }
+
+    // Initialize the survey
+    updateButtons();
+    questions[currentQuestionIndex].style.display = 'block';
+  </script>
+</body>
+</html>
