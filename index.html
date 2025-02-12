@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Typing Tool</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100 font-sans">
+
+    <div class="container mx-auto p-6">
+        <h2 class="text-3xl font-semibold text-center mb-6 text-gray-800">Typing Tool</h2>
+
+        <div class="overflow-x-auto bg-white shadow-lg rounded-lg">
+            <table class="min-w-full table-auto">
+                <thead>
+                    <tr class="bg-gray-200">
+                        <th class="px-4 py-3 text-left text-sm font-medium text-gray-700">Question</th>
+                        <th class="px-4 py-3 text-left text-sm font-medium text-gray-700">Likert Scale Answer (1 to 5)</th>
+                        <th class="px-4 py-3 text-left text-sm font-medium text-gray-700">Segment 1: "Uninterested"</th>
+                        <th class="px-4 py-3 text-left text-sm font-medium text-gray-700">Segment 2: "Passively interested"</th>
+                        <th class="px-4 py-3 text-left text-sm font-medium text-gray-700">Segment 3: "Actively interested"</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- Question 1 -->
+                    <tr>
+                        <td class="px-4 py-3 text-sm text-gray-700">Q1: How do you perceive the value of one-time gene therapy versus chronic treatment options?</td>
+                        <td class="px-4 py-3">
+                            <input type="number" id="q1" min="1" max="5" class="w-12 text-center p-2 border border-gray-300 rounded" oninput="validateAndCalculate()">
+                            <div class="text-red-500 text-xs mt-1 hidden" id="error-q1">Enter 1-5</div>
+                        </td>
+                        <td class="px-4 py-3 text-sm text-gray-700" id="q1-s1"></td>
+                        <td class="px-4 py-3 text-sm text-gray-700" id="q1-s2"></td>
+                        <td class="px-4 py-3 text-sm text-gray-700" id="q1-s3"></td>
+                    </tr>
+
+                    <!-- Question 2 -->
+                    <tr>
+                        <td class="px-4 py-3 text-sm text-gray-700">Q2: What is your comfort level with initiating new treatment approaches?</td>
+                        <td class="px-4 py-3">
+                            <input type="number" id="q2" min="1" max="5" class="w-12 text-center p-2 border border-gray-300 rounded" oninput="validateAndCalculate()">
+                            <div class="text-red-500 text-xs mt-1 hidden" id="error-q2">Enter 1-5</div>
+                        </td>
+                        <td class="px-4 py-3 text-sm text-gray-700" id="q2-s1"></td>
+                        <td class="px-4 py-3 text-sm text-gray-700" id="q2-s2"></td>
+                        <td class="px-4 py-3 text-sm text-gray-700" id="q2-s3"></td>
+                    </tr>
+
+                    <!-- Question 3 -->
+                    <tr>
+                        <td class="px-4 py-3 text-sm text-gray-700">Q3: How do you prioritize safety over efficacy when selecting treatments?</td>
+                        <td class="px-4 py-3">
+                            <input type="number" id="q3" min="1" max="5" class="w-12 text-center p-2 border border-gray-300 rounded" oninput="validateAndCalculate()">
+                            <div class="text-red-500 text-xs mt-1 hidden" id="error-q3">Enter 1-5</div>
+                        </td>
+                        <td class="px-4 py-3 text-sm text-gray-700" id="q3-s1"></td>
+                        <td class="px-4 py-3 text-sm text-gray-700" id="q3-s2"></td>
+                        <td class="px-4 py-3 text-sm text-gray-700" id="q3-s3"></td>
+                    </tr>
+
+                    <!-- Question 4 -->
+                    <tr>
+                        <td class="px-4 py-3 text-sm text-gray-700">Q4: How do you approach treatment switching in cases of patient non-responsiveness?</td>
+                        <td class="px-4 py-3">
+                            <input type="number" id="q4" min="1" max="5" class="w-12 text-center p-2 border border-gray-300 rounded" oninput="validateAndCalculate()">
+                            <div class="text-red-500 text-xs mt-1 hidden" id="error-q4">Enter 1-5</div>
+                        </td>
+                        <td class="px-4 py-3 text-sm text-gray-700" id="q4-s1"></td>
+                        <td class="px-4 py-3 text-sm text-gray-700" id="q4-s2"></td>
+                        <td class="px-4 py-3 text-sm text-gray-700" id="q4-s3"></td>
+                    </tr>
+
+                    <!-- Question 5 -->
+                    <tr>
+                        <td class="px-4 py-3 text-sm text-gray-700">Q5: How frequently do you monitor patients after initiating new treatments?</td>
+                        <td class="px-4 py-3">
+                            <input type="number" id="q5" min="1" max="5" class="w-12 text-center p-2 border border-gray-300 rounded" oninput="validateAndCalculate()">
+                            <div class="text-red-500 text-xs mt-1 hidden" id="error-q5">Enter 1-5</div>
+                        </td>
+                        <td class="px-4 py-3 text-sm text-gray-700" id="q5-s1"></td>
+                        <td class="px-4 py-3 text-sm text-gray-700" id="q5-s2"></td>
+                        <td class="px-4 py-3 text-sm text-gray-700" id="q5-s3"></td>
+                    </tr>
+
+                    <!-- Constant Values -->
+                    <tr class="bg-gray-50">
+                        <td class="px-4 py-3 font-semibold text-sm text-gray-700">Constant</td>
+                        <td class="px-4 py-3 text-sm text-gray-700">1</td>
+                        <td class="px-4 py-3 text-sm text-gray-700" id="constant-s1">9.802</td>
+                        <td class="px-4 py-3 text-sm text-gray-700" id="constant-s2">-0.392</td>
+                        <td class="px-4 py-3 text-sm text-gray-700" id="constant-s3">-0.959</td>
+                    </tr>
+
+                    <!-- Total Scores -->
+                    <tr class="font-semibold text-sm bg-gray-100">
+                        <td colspan="2" class="px-4 py-3 text-gray-700">Total Segment Score</td>
+                        <td class="px-4 py-3 text-gray-700" id="score1">0</td>
+                        <td class="px-4 py-3 text-gray-700" id="score2">0</td>
+                        <td class="px-4 py-3 text-gray-700" id="score3">0</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <script>
+        const weights = {
+            q1: [-0.561, 0.045, 2.023],
+            q2: [-0.352, 2.317, 0.157],
+            q3: [-0.660, 0.279, 0.467],
+            q4: [-0.559, 0.489, -0.142],
+            q5: [0.123, -0.456, 1.567]
+        };
+
+        const constants = [9.802, -0.392, -0.959];
+
+        function validateAndCalculate() {
+            let scores = [...constants];
+            let allFilled = true;
+
+            for (let i = 1; i <= 5; i++) {
+                let input = document.getElementById(`q${i}`);
+                let value = parseFloat(input.value);
+                let error = document.getElementById(`error-q${i}`);
+
+                if (isNaN(value) || value < 1 || value > 5) {
+                    error.style.display = "block";
+                    allFilled = false;
+                } else {
+                    error.style.display = "none";
+                    for (let j = 1; j <= 3; j++) {
+                        let segmentValue = weights[`q${i}`][j - 1] * value;
+                        document.getElementById(`q${i}-s${j}`).innerText = segmentValue.toFixed(3);
+                        scores[j - 1] += segmentValue;
+                    }
+                }
+            }
+
+            if (allFilled) {
+                document.getElementById("score1").innerText = scores[0].toFixed(3);
+                document.getElementById("score2").innerText = scores[1].toFixed(3);
+                document.getElementById("score3").innerText = scores[2].toFixed(3);
+            }
+        }
+    </script>
+
+</body>
+</html>
